@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+# Define the key mapping
+MAPPING = %w[2 22 222 3 33 333 4 44 444 5 55 555 6 66 666 7 77 777 7777 8 88 888 9 99 999 9999]
+
+# Read a single line and hault
+line = ARGF.readline
+
+# Start with a blank string
+result = ''
+
+# Iterate over the collection and examine one character at a time
+line.chomp.each_char do |char|
+
+  # Normalize
+  char = char.upcase
+
+  if char === ' '
+    # If the char is a space, map to the zero
+    result << '0'
+  elsif ('A'..'Z').include? char
+    # If this is a letter, shift it and map to the output
+    result << MAPPING[char.ord - 'A'.ord]
+  end
+
+end
+
+puts result
